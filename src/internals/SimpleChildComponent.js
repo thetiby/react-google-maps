@@ -45,8 +45,18 @@ class SimpleChildComponent extends EventComponent {
         return;
       }
       const GoogleMapsClass = objectPath.get(googleMapsApi, googleMapsClassName);
-      instance = new GoogleMapsClass(googleMapsConfig);
+      if (googleMapsClassName === "InfoWindow" && !props.content) {
+        var detachedDiv = document.createElement('div'),
+            childComponent = React.Children.only(props.children);
 
+        if (childComponent.props.wrapperClassName) {
+            detachedDiv.className = childComponent.props.wrapperClassName;
+        }
+        
+        React.render(childComponent, detachedDiv);
+        googleMapsConfig.content = detachedDiv;
+      }
+      instance = new GoogleMapsClass(googleMapsConfig);
       exposeGetters(this, GoogleMapsClass.prototype, instance);
       this.setState({instance});
     }
