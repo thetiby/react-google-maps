@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
 import EventComponent from "./internals/EventComponent";
 /*eslint-disable no-unused-vars */
@@ -6,8 +8,6 @@ import VirtualContainer from "./internals/VirtualContainer";
 /*eslint-enable no-unused-vars */
 import exposeGetters from "./internals/exposeGetters";
 import createRegisterEvents from "./internals/createRegisterEvents";
-
-const {PropTypes} = React;
 
 class GoogleMaps extends EventComponent {
   /*
@@ -64,7 +64,7 @@ class GoogleMaps extends EventComponent {
     } else {
       const GoogleMapsClass = googleMapsApi.Map;
       instance = new GoogleMapsClass(
-        React.findDOMNode(this.refs.googleMaps),
+        ReactDOM.findDOMNode(this.refs.googleMaps),
         googleMapsConfig
       );
       exposeGetters(this, GoogleMapsClass.prototype, instance);

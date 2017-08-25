@@ -1,9 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import SimpleChildComponent from "./internals/SimpleChildComponent";
 import createRegisterEvents from "./internals/createRegisterEvents";
-
-const {PropTypes} = React;
 
 class InfoWindow extends SimpleChildComponent {
 

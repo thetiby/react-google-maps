@@ -1,11 +1,10 @@
 import React from "react";
-import warning from "react/lib/warning";
+import ReactDOM from "react-dom";
 import objectPath from "object-path";
+import PropTypes from "prop-types";
 
 import EventComponent from "./EventComponent";
 import exposeGetters from "./exposeGetters";
-
-const {PropTypes} = React;
 
 class SimpleChildComponent extends EventComponent {
   /* Contract
@@ -36,12 +35,11 @@ class SimpleChildComponent extends EventComponent {
     } else {
       const googleMapsClassName = this.constructor._GoogleMapsClassName;
       if (!objectPath.has(googleMapsApi, googleMapsClassName)) {
-        warning(false,
-"This react-google-maps component can't find the corresponding " +
-"Google Maps API class 'google.maps.%s'. You may have to include " +
-"additional Google Maps libraries in your javascript src URL. " +
-"See: https://developers.google.com/maps/documentation/javascript/libraries",
-        googleMapsClassName);
+        const msg = "This react-google-maps component can't find the corresponding " +
+        "Google Maps API class 'google.maps." + googleMapsClassName + "'. You may have to include " +
+        "additional Google Maps libraries in your javascript src URL. " +
+        "See: https://developers.google.com/maps/documentation/javascript/libraries";
+        console.warn(msg);
         return;
       }
       const GoogleMapsClass = objectPath.get(googleMapsApi, googleMapsClassName);
@@ -63,7 +61,7 @@ class SimpleChildComponent extends EventComponent {
       if (childComponent.props.wrapperClassName) {
           detachedDiv.className = childComponent.props.wrapperClassName;
       }
-      React.render(childComponent, detachedDiv);
+      ReactDOM.render(childComponent, detachedDiv);
       config.content = detachedDiv;
       return config;
     }
