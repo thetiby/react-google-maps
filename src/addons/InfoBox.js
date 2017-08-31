@@ -1,9 +1,7 @@
-import React from "react";
+import PropTypes from "prop-types";
 import SimpleChildComponent from "../internals/SimpleChildComponent";
 import createRegisterEvents from "../internals/createRegisterEvents";
 import exposeGetters from "../internals/exposeGetters";
-
-const {PropTypes} = React;
 
 class InfoBox extends SimpleChildComponent {
   constructor (...args) {
